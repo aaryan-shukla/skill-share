@@ -12,6 +12,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"], // Add Poppins font
+        inter: ["Inter", "sans-serif"], // Optional: Inter font
+        outfit: ["Outfit", "sans-serif"], // Optional: Outfit font
+      },
     },
   },
   plugins: [],
