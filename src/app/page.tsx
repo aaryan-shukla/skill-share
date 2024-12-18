@@ -1,9 +1,11 @@
-import MentorHome from "./components/MentoraTab/Home/page";
+
+import Image from "next/image";
+import LandingPage from "./pages/landingPage";
 
 export default function Home() {
   return (
-    <div className="font-poppins">
-      <MentorHome />
+    <div>
+      <LandingPage />
     </div>
   );
 }
