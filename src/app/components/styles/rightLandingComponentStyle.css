@@ -22,6 +22,7 @@
   border-radius: 10px;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 }
+
 .text-overlay {
   display: flex;
   flex-direction: column;
@@ -65,6 +66,18 @@
   outline: none;
 }
 
+.login-buttons {
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.login-buttons.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -74,4 +87,15 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+.role-buttons {
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+.role-buttons.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
