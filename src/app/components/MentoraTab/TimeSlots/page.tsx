@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { UserPlus, Trash2, Check, X } from "lucide-react";
-import Session from "@/app/constants/types";
+import { Session } from "@/app/types";
 
 const TimeSlots: React.FC<{
   selectedDate: string;

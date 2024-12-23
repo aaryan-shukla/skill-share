@@ -1,18 +1,13 @@
 "use client";
 
 import React from "react";
+import FormCard from "@/app/components/SignUpFormCard/formCard";
 
-import { learnerSignUpFields } from "@/app/constants/constant";
-import FormCard from "@/app/components/formCard";
-
-const LearnerLogin = () => {
-  const handleSubmit = (formData: { [key: string]: string }) => {
-    console.log("Form Data:", formData);
-  };
+const LearnerRegistration = () => {
+  const handleSubmit = () => {};
 
   return (
     <FormCard
-      fields={learnerSignUpFields}
       heading="Learner Registration"
       imageSource="/skillShareFormLearnerImage.jpeg"
       onSubmit={handleSubmit}
@@ -20,4 +15,4 @@ const LearnerLogin = () => {
   );
 };
 
-export default LearnerLogin;
+export default LearnerRegistration;

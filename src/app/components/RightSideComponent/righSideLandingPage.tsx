@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import "../components/styles/rightLandingComponentStyle.css";
-import Button from "./button";
+import React, { useState } from "react";
+import "./rightLandingComponentStyle.css";
+import Button from "../Button/button";
 import { useRouter } from "next/navigation";
 
 const RightSideComponent = () => {
