@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import "../components/styles/landingPageButton.css";
-import { LandingButtonProps } from "../types";
+import { LandingButtonProps } from "../constants/types";
 
 export const Button = ({ text, onClick }: LandingButtonProps) => {
   return (

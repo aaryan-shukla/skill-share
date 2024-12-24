@@ -30,3 +30,23 @@ export const mentorLoginFields = [
   { name: "Email", type: "email", placeholder: "Enter your Email" },
   { name: "Password", type: "password", placeholder: "*******" },
 ];
+export const cardData = [
+  {
+    title: "Live Courses",
+    description: "Description of Live Courses",
+    bgImageSource: "lc.jpg",
+    tabUrl: "https://www.youtube.com/",
+  },
+  {
+    title: "Recorded Courses",
+    description: "Description of Recorded Courses",
+    bgImageSource: "recorded_courses.png",
+    tabUrl: "https://www.youtube.com/",
+  },
+  {
+    title: "Mentorships",
+    description: "Description of Mentorships",
+    bgImageSource: "mentorship.jpg",
+    tabUrl: "https://www.youtube.com/",
+  },
+];

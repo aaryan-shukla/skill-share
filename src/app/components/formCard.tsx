@@ -3,19 +3,7 @@
 import React, { useState } from "react";
 import "../components/styles/formCard.css";
 import { Card, Button } from "@mui/material";
-
-type Field = {
-  name: string;
-  type: string;
-  placeholder: string;
-};
-
-type FormCardProps = {
-  fields: Field[];
-  heading: string;
-  imageSource: string;
-  onSubmit: (formData: { [key: string]: string }) => void;
-};
+import { FormCardProps } from "../constants/types";
 
 const FormCard: React.FC<FormCardProps> = ({
   fields,
