@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Session } from "@/app/constants/types";
+import { Session } from "../types";
 
 interface SessionStore {
   selectedDate: string;

@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import "../styles/landingPageImage.css";
-import RightSideComponent from "../components/righSideLandingPage";
+import "./landingPageImage.css";
+import RightSideComponent from "../../components/RightSideComponent/righSideLandingPage";
 
 export default function LandingPage() {
   return (

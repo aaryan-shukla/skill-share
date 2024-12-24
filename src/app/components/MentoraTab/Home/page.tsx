@@ -1,7 +1,8 @@
 "use client";
+
 import React, { useState } from "react";
 import { Search, Plus } from "lucide-react";
-import Session from "@/app/constants/types";
+import { Session } from "@/app/types";
 import DateCarousel from "../DateCarousel/page";
 import TimeSlots from "../TimeSlots/page";
 import AddSessionModal from "../AddSessionModal/page";
@@ -23,11 +24,13 @@ const MentorHome: React.FC = () => {
       session.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       session.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   const handleDeleteSession = (sessionId: string) => {
     setSessions((prevSessions) =>
       prevSessions.filter((session) => session.id !== sessionId)
     );
   };
+
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col p-6">
       <div className="mb-6">
@@ -59,8 +62,8 @@ const MentorHome: React.FC = () => {
         </div>
 
         <DateCarousel
-          onDateSelect={setSelectedDate}
           selectedDate={selectedDate}
+          onDateSelect={setSelectedDate}
         />
 
         <TimeSlots

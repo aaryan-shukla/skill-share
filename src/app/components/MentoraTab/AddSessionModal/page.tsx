@@ -1,16 +1,24 @@
-import { X } from "lucide-react";
+import { X, Calendar } from "lucide-react";
 import { useState } from "react";
 import { useSessionStore } from "@/app/store/sessionStore";
-import { Session } from "@/app/constants/types";
+import { Session } from "@/app/types";
 
-const AddSessionModal: React.FC<{
+interface AddSessionModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAddSession: (session: Session) => void;
-}> = ({ isOpen, onClose, onAddSession }) => {
-  const { selectedDate, sessionDetails, setSessionDetails } = useSessionStore();
+  selectedDate: string;
+}
 
+const AddSessionModal: React.FC<AddSessionModalProps> = ({
+  isOpen,
+  onClose,
+  onAddSession,
+  selectedDate: initialDate,
+}) => {
+  const { sessionDetails, setSessionDetails } = useSessionStore();
   const [timeError, setTimeError] = useState("");
+  const [selectedDate, setSelectedDate] = useState(initialDate);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,6 +44,12 @@ const AddSessionModal: React.FC<{
         setTimeError("Cannot create a session in the past");
         return;
       }
+    }
+
+    // Check if selected date is not in the past
+    if (selectedDate < today) {
+      setTimeError("Cannot create a session on a past date");
+      return;
     }
 
     const newSession: Session = {
@@ -85,20 +99,39 @@ const AddSessionModal: React.FC<{
             className="w-full p-2 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300"
             required
           />
-          <input
-            type="time"
-            value={sessionDetails.time || ""}
-            onChange={(e) => {
-              setSessionDetails({ time: e.target.value });
-              setTimeError("");
-            }}
-            className={`w-full p-2 border rounded shadow-sm focus:outline-none focus:ring-2 ${
-              timeError
-                ? "border-red-500 focus:ring-red-500"
-                : "focus:ring-red-300"
-            }`}
-            required
-          />
+          <div className="flex space-x-2">
+            <div className="relative flex-1">
+              <Calendar
+                className="absolute left-2 top-2.5 text-gray-400"
+                size={16}
+              />
+              <input
+                type="date"
+                value={selectedDate}
+                min={new Date().toISOString().split("T")[0]}
+                onChange={(e) => {
+                  setSelectedDate(e.target.value);
+                  setTimeError("");
+                }}
+                className="w-full p-2 pl-8 border rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-red-300"
+                required
+              />
+            </div>
+            <input
+              type="time"
+              value={sessionDetails.time || ""}
+              onChange={(e) => {
+                setSessionDetails({ time: e.target.value });
+                setTimeError("");
+              }}
+              className={`flex-1 p-2 border rounded shadow-sm focus:outline-none focus:ring-2 ${
+                timeError
+                  ? "border-red-500 focus:ring-red-500"
+                  : "focus:ring-red-300"
+              }`}
+              required
+            />
+          </div>
           {timeError && <p className="text-red-500 text-sm">{timeError}</p>}
           <div className="flex space-x-2">
             <input

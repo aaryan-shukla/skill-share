@@ -1,11 +1,17 @@
-import { DateItem } from "@/app/constants/types";
+"use client";
+
+import React from "react";
 import { Clock } from "lucide-react";
-import { useMemo } from "react";
-import { useSessionStore } from "@/app/store/sessionStore";
+import { DateItem } from "@/app/types";
+interface DateCarouselProps {
+  selectedDate: string;
+  onDateSelect: (date: string) => void;
+}
 
-const DateCarousel: React.FC = () => {
-  const { selectedDate, setSelectedDate } = useSessionStore();
-
+const DateCarousel: React.FC<DateCarouselProps> = ({
+  selectedDate,
+  onDateSelect,
+}) => {
   const generateDateRange = (startDate: Date, days: number): DateItem[] => {
     const dates: DateItem[] = [];
     for (let i = 0; i < days; i++) {
@@ -23,7 +29,7 @@ const DateCarousel: React.FC = () => {
     return dates;
   };
 
-  const dates = useMemo(() => generateDateRange(new Date(), 6), []);
+  const dates = React.useMemo(() => generateDateRange(new Date(), 6), []);
 
   return (
     <div className="flex space-x-1 p-2">
@@ -40,7 +46,7 @@ const DateCarousel: React.FC = () => {
             }
             hover:w-32 hover:scale-105 hover:shadow-lg
           `}
-          onClick={() => setSelectedDate(dateItem.fullDate)}
+          onClick={() => onDateSelect(dateItem.fullDate)}
         >
           <span className="text-xs font-semibold transition-opacity duration-300">
             {dateItem.day}
