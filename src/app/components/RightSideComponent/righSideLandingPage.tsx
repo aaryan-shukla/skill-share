@@ -31,7 +31,7 @@ const RightSideComponent = () => {
       router.push("/learner/signup");
     }
   };
-
+  console.log(activeRole);
   const handleLogin = () => {
     if (activeRole === "mentor") {
       router.push("/mentor/login");
