@@ -29,3 +29,22 @@ export interface UserData {
   photoUrl: string;
   address: string;
 }
+
+
+export interface CardProps {
+  title?: string;
+  description?: string;
+  bgImageSource?: string;
+  tabUrl?: string;
+}
+type Field = {
+  name: string;
+  type: string;
+  placeholder: string;
+};
+export interface FormCardProps {
+  fields: Field[];
+  heading: string;
+  imageSource: string;
+  onSubmit: (formData: { [key: string]: string }) => void;
+}

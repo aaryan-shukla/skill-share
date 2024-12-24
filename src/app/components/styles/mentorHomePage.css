@@ -1,0 +1,54 @@
+body {
+  background-color: rgb(235, 235, 235);
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+.header-container {
+  text-align: center;
+  /* margin: 20px 10px; */
+  /* padding: 10px; */
+}
+
+.header-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.typing-effect {
+  font-size: 1.2rem;
+  color: #666;
+  opacity: 0;
+  animation: fade-in 2s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 2rem;
+}
+
+.cardContainer > * {
+  flex: 1 1 300px;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 868px) {
+  .carContainer > * {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
