@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.profile-container {
+  max-width: 70rem;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+.profile-header {
+  background: linear-gradient(90deg, #353434ff, #a15353ff, #e32727ff);
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  gap: 20px;
+}
+
+.profile-photo-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.profile-photo {
+  border-radius: 50%;
+  width: 9.5rem;
+  height: 9.5rem;
+  object-fit: cover;
+}
+
+.photo-options {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 9.6rem;
+  height: 9.5rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  border-radius: 50%;
+  transition: opacity 0.3s;
+}
+
+.profile-photo-container:hover .photo-options {
+  opacity: 1;
+}
+
+.button {
+  padding: 8px 12px;
+  /* background-color: #007bff; */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #6996c6c1;
+}
+
+.profile-info h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.profile-info .email {
+  margin-top: 5px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+.profile-details-heading {
+  color: rgb(236, 62, 62);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+.profile-details {
+  padding: 20px;
+  color: #57789eff;
+}
+
+.profile-details h2 {
+  margin-top: 0;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.info-label {
+  flex: 0.5;
+  color: rgb(0, 0, 0);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  /* font-style: italic; */
+  font-weight: bold;
+}
+
+.info-row p,
+.info-row input {
+  flex: 2;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgb(218, 46, 46);
+  box-shadow: 0px 4px 8px rgba(254, 6, 6, 0.324);
+}
+
+.info-row p {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+}
+
+.input-field {
+  border: 1px solid #007bff;
+}
+
+.edit-button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #ffffffff;
+  color: rgb(233, 51, 51);
+  border-bottom: 0px solid #007bff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: rgb(225, 52, 52);
+  color: #fff;
+}

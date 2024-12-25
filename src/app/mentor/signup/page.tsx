@@ -6,6 +6,7 @@ import FormCard from "@/app/components/SignUpFormCard/formCard";
 import { useUserStore } from "@/app/store/userdetailsStore";
 import axios from "axios";
 import { CircularProgress, Backdrop } from "@mui/material";
+import { mentorSignUpFields } from "@/app/types/constant";
 
 const MentorRegistration = () => {
   const selectedUser = useUserStore((state) => state.selectedUser);
@@ -56,6 +57,7 @@ const MentorRegistration = () => {
   return (
     <>
       <FormCard
+        fields={mentorSignUpFields}
         heading="Mentor Registration"
         imageSource="/skillShare.jpeg"
         onSubmit={handleSubmit}
@@ -66,8 +68,7 @@ const MentorRegistration = () => {
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}
-      >
+        }}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </>

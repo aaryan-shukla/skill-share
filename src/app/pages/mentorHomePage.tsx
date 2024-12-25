@@ -1,7 +1,7 @@
 import React from "react";
-import CardComponent from "../components/MentoraTab/CardComponent/page";
+import CardComponent from "../components/CardComponent/page";
 import "../components/styles/mentorHomePage.css";
-import { cardData } from "../constants/constant";
+import { cardData } from "../types/constant";
 import Navbar from "../components/NavBar/page";
 export default function MentorHomePage() {
   return (

@@ -46,5 +46,5 @@ export interface FormCardProps {
   fields: Field[];
   heading: string;
   imageSource: string;
-  onSubmit: (formData: { [key: string]: string }) => void;
+  onSubmit: (formData: UserData) => void;
 }

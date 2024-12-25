@@ -6,7 +6,7 @@ import FormCard from "@/app/components/SignUpFormCard/formCard";
 import { useUserStore } from "@/app/store/userdetailsStore";
 import axios from "axios";
 import { CircularProgress, Backdrop } from "@mui/material";
-
+import { learnerSignUpFields } from "@/app/types/constant";
 const LearnerRegistration = () => {
   const selectedUser = useUserStore((state) => state.selectedUser);
   const [loading, setLoading] = useState(false);
@@ -56,18 +56,18 @@ const LearnerRegistration = () => {
   return (
     <>
       <FormCard
+        fields={learnerSignUpFields}
         heading="Learner Registration"
         imageSource="/skillShareFormLearnerImage.jpeg"
         onSubmit={handleSubmit}
-        error={error}
+        // error={error}
       />
       <Backdrop
         open={loading}
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}
-      >
+        }}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </>

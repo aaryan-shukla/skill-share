@@ -3,70 +3,53 @@
 import React, { useState } from "react";
 import { Card, Button } from "@mui/material";
 import "./formCard.css";
-interface FormCardProps {
-  heading: string;
-  imageSource: string;
-  onSubmit: (email: string, password: string) => void;
-  error?: string;
-}
+import { FormCardProps } from "@/app/types";
 
 const FormCard: React.FC<FormCardProps> = ({
+  fields,
   heading,
   imageSource,
   onSubmit,
-  error,
 }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState<{ [key: string]: string }>(
+    fields.reduce((acc, field) => ({ ...acc, [field.name]: "" }), {})
+  );
 
-  const handleSubmit = () => {
-    onSubmit(email, password);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const handleSubmit = () => {
+    onSubmit(formData);
+  };
+  console.log(formData);
   return (
     <div className="container">
       <Card className="card">
-        <div className="relative h-48">
-          <img
-            src={imageSource}
-            alt="Form Background"
-            className="w-full h-full object-cover"
-          />
+        <div className="formImageContainer">
+          <img src={imageSource} alt="Form Background" className="formImage" />
         </div>
-
-        <div className="p-6">
-          <h2 className="text-2xl font-bold mb-6 text-center">{heading}</h2>
-
-          <div className="inputContainer">
+        <h2>{heading}</h2>
+        <div className="inputContainer">
+          {fields.map((field, index) => (
             <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              key={index}
               className="form-control"
+              type={field.type}
+              placeholder={field.placeholder}
+              name={field.name}
+              value={formData[field.name]}
+              onChange={handleChange}
             />
-
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="form-control"
-            />
-          </div>
-
-          <Button
-            variant="contained"
-            className="submit-btn"
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
-
-          {error && (
-            <p className="text-red-500 text-sm mt-2 text-center">{error}</p>
-          )}
+          ))}
         </div>
+        <Button
+          variant="contained"
+          className="submit-btn"
+          onClick={handleSubmit}>
+          Submit
+        </Button>
       </Card>
     </div>
   );
