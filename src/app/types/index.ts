@@ -48,3 +48,15 @@ export interface FormCardProps {
   imageSource: string;
   onSubmit: (formData: UserData) => void;
 }
+export interface CourseCardProps {
+  title: string;
+  author: string;
+  price: number;
+  originalPrice: number;
+  rating: number;
+  imageUrl: string;
+}
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}

@@ -1,0 +1,47 @@
+body {
+  background-color: rgb(227, 227, 227);
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+.headerTextContainer {
+  text-align: center;
+  margin: 20px 10px;
+  padding: 10px;
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+.headerContainer {
+  text-align: center;
+  margin: 20px 10px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.headerContainer > div {
+  flex: 0 1 300px; /* Adjust width as needed */
+}
+.headerContainer h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.typingEffect {
+  font-size: 1.2rem;
+  color: #666;
+  opacity: 0;
+  animation: fade-in 2s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  background-color: #f2f1f1ff;
+}
+.searchFilterContainer {
+  margin: 10px;
+  background-color: white;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.45);
+  border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  position: relative;
+  overflow: hidden;
+}
+.courseList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media (min-width: 1200px) {
+  .courseList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .courseList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .courseList {
+    grid-template-columns: 1fr;
+  }
+}
+.filterButton {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background-color: #006eff00;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/1828/1828817.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.filterButton:hover {
+  background-color: #0056b3;
+}
+.coursesText {
+  color: rgb(239, 61, 61);
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
+.searchBar {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.searchInput {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px 10px 10px 10px;
+  font-size: 14px;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #e21414ff;
+  box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);
+  color: rgb(237, 42, 42);
+}
+
+.searchButton {
+  width: 2rem;
+  height: 2rem;
+  border: 0.5px solid #e21414ff;
+  background-color: #ff000000;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+  background-image: url("https://cdn-icons-png.flaticon.com/512/149/149852.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.searchButton:hover {
+  background-color: #f30707f0;
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modalOverlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Modal Content */
+.modalContent {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 400px;
+  text-align: center;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.modalOverlay.open .modalContent {
+  transform: translateY(0);
+  opacity: 1;
+}

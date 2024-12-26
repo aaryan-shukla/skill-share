@@ -1,19 +1,34 @@
 import React from "react";
-import "../styles/cardComponent.css";
+import styles from "../styles/cardComponent.module.css";
 import { CardProps } from "@/app/types";
-const CardComponent: React.FC<CardProps> = ({
+const CardComponent: React.FC<CardProps & { onClick?: () => void }> = ({
   title,
   description,
   bgImageSource,
   tabUrl,
+  onClick,
 }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault();
+      onClick();
+    }
+  };
   return (
-    <div className="card">
-      <a href={tabUrl} target="_blank" rel="noopener noreferrer">
-        <div className="card-image">
-          <img src={bgImageSource} alt="Card Image" className="cardImage" />
+    <div className={styles.card}>
+      <a
+        href={tabUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}>
+        <div className={styles.cardImage1}>
+          <img
+            src={bgImageSource}
+            alt="Card Image"
+            className={styles.cardImage}
+          />
         </div>
-        <div className="card-content">
+        <div className={styles.cardContent}>
           <h3>{title}</h3>
           <p>{description}</p>
         </div>

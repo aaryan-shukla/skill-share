@@ -35,18 +35,18 @@ export const cardData = [
     title: "Live Courses",
     description: "Description of Live Courses",
     bgImageSource: "lc.jpg",
-    tabUrl: "https://www.youtube.com/",
+    tabUrl: "/mentor/live-courses",
   },
   {
     title: "Recorded Courses",
     description: "Description of Recorded Courses",
     bgImageSource: "recorded_courses.png",
-    tabUrl: "https://www.youtube.com/",
+    tabUrl: "/mentor/recorded-courses",
   },
   {
     title: "Mentorships",
     description: "Description of Mentorships",
     bgImageSource: "mentorship.jpg",
-    tabUrl: "https://www.youtube.com/",
+    tabUrl: "/mentor/mentorship",
   },
 ];

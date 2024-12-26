@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import "../styles/navBar.css";
-
+import styles from "../styles/navBar.module.css";
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -11,18 +10,22 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-left">
-        <img src="logo.png" alt="Skill Share Logo" className="logo" />
-        <span className="brand-name">SKILL </span>
-        <span className="brand-name-1">SHARE</span>
+    <nav className={styles.navbar}>
+      <div className={styles.navbarLeft}>
+        <img src="/logo.png" alt="Skill Share Logo" className={styles.logo} />
+        <span className={styles.brandName}>SKILL </span>
+        <span className={styles.brandName1}>SHARE</span>
       </div>
-      <div className="navbar-right">
-        <div className="profile-icon" onClick={toggleDropdown}>
-          <img src="profile.jpg" alt="Profile Icon" className="profile-image" />
+      <div className={styles.navbarRight}>
+        <div className={styles.profileIcon} onClick={toggleDropdown}>
+          <img
+            src="/profile.jpg"
+            alt="Profile Icon"
+            className={styles.profileImage}
+          />
         </div>
         {dropdownOpen && (
-          <div className="dropdown-menu">
+          <div className={styles.dropdownMenu}>
             <ul>
               <li>My Profile</li>
               <li>Settings</li>

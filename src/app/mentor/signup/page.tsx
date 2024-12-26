@@ -61,7 +61,7 @@ const MentorRegistration = () => {
         heading="Mentor Registration"
         imageSource="/skillShare.jpeg"
         onSubmit={handleSubmit}
-        error={error}
+        // error={error}
       />
       <Backdrop
         open={loading}

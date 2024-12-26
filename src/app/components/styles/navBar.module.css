@@ -5,52 +5,61 @@
   padding: 0 16px;
   background-color: white;
   box-shadow: 0px 2px 5px rgba(245, 9, 9, 0.45);
-  height: 60px;
+  height: 60px; /* Sets a fixed navbar height */
+  position: relative; /* Ensures child elements align within the navbar */
+  z-index: 10; /* Keeps it above other elements */
 }
 
-.navbar-left {
+.navbarLeft {
   display: flex;
-  align-items: center;
+  align-items: center; /* Vertically centers the items */
 }
 
 .logo {
-  height: 40px;
-  margin-right: 8px;
+  height: 40px; /* Adjust the height of the logo */
+  margin-right: 8px; /* Adds space between the logo and text */
+  display: block; /* Ensures the image respects its container */
 }
 
-.brand-name {
+.brandName,
+.brandName1 {
   font-size: 18px;
   font-weight: bold;
   font-family: "Roboto", sans-serif;
+  line-height: 1.2; /* Ensures proper spacing between text lines */
+}
+
+.brandName {
   color: rgb(237, 42, 42);
 }
-.brand-name-1 {
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "Roboto", sans-serif;
+
+.brandName1 {
   color: #333;
 }
-.navbar-right {
+
+.navbarRight {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: center; /* Aligns the profile icon vertically */
 }
 
-.profile-icon {
+.profileIcon {
   cursor: pointer;
   display: flex;
   align-items: center;
 }
 
-.profile-image {
+.profileImage {
   height: 40px;
   width: 40px;
   border-radius: 50%;
   border: 1px solid #f00b0b;
+  object-fit: cover; /* Ensures the image doesn't stretch */
 }
-.dropdown-menu {
+
+.dropdownMenu {
   position: absolute;
-  top: 60px;
+  top: 60px; /* Matches navbar height */
   right: 0;
   background-color: white;
   box-shadow: 0px 4px 8px rgba(253, 2, 2, 0.2);
@@ -59,18 +68,18 @@
   z-index: 1000;
 }
 
-.dropdown-menu ul {
+.dropdownMenu ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.dropdown-menu ul li {
+.dropdownMenu ul li {
   padding: 10px 16px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.dropdown-menu ul li:hover {
+.dropdownMenu ul li:hover {
   background-color: #ef2323b1;
 }
