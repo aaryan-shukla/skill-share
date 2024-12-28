@@ -21,6 +21,7 @@
   border-radius: 8px;
   width: 400px;
   text-align: center;
+  width: 70%;
   transform: translateY(-20px);
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
@@ -55,4 +56,60 @@
 
 .modal-close-button:hover {
   background-color: #b91c1c;
+}
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+.form-group-row {
+  display: flex;
+  gap: 1rem; /* Space between inputs */
+  align-items: flex-start; /* Align items at the start of the row */
+}
+input[type="number"] {
+  width: 150px; /* Adjust the width of the numeric input */
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: black;
+  text-align: left;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #0066ffff;
+}
+
+.folder-name {
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #555;
+}
+
+.modal-submit-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #007bff;
+  margin-right: 0.5rem;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-submit-button:hover {
+  background-color: #0056b3;
 }
