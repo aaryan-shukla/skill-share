@@ -16,7 +16,7 @@ body {
 .card {
   width: 60%;
   max-width: 400px;
-  height: 500px;
+  height: 650px; /* Increased height to accommodate content */
   text-align: center;
   padding-bottom: 20px;
   background-color: rgb(255, 253, 253);
@@ -31,31 +31,40 @@ body {
   transform: translateY(-5px);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
 }
+
 .formImageContainer {
   width: 100%;
   height: 150px;
-  margin-bottom: 20px;
   position: relative;
+  flex-shrink: 0; /* Prevent image container from shrinking */
 }
 
 .formImage {
   width: 100%;
-  height: 100%;
+  height: 95%;
   object-fit: cover;
+}
+
+.heading {
+  margin: 10px 0;
+  font-weight: bold;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  flex-shrink: 0; /* Prevent heading from shrinking */
 }
 
 .inputContainer {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   padding: 10px;
   overflow-y: auto;
+  height: calc(100% - 200px); /* Calculate remaining space */
+  margin-bottom: 10px;
 }
 
 .form-control {
   width: 90%;
   padding: 10px 12px;
-  margin: 16px auto;
+  margin: 8px auto;
   border: 1px solid #ccc;
   border-radius: 4px;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -71,21 +80,36 @@ button.submit-btn {
   padding: 12px 20px;
   background-color: #ffffff;
   color: indianred;
-  border: none;
   border: 1px solid indianred;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 20px auto;
+  margin: 10px auto;
   width: auto;
   display: block;
+  flex-shrink: 0; /* Prevent button from shrinking */
 }
 
 button.submit-btn:hover {
-  background-color: indianred; /* Darker shade on hover */
+  background-color: indianred;
   color: #ffffff;
 }
-.heading {
-  font-weight: bold;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+/* Custom scrollbar styling */
+.inputContainer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.inputContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.inputContainer::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.inputContainer::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }

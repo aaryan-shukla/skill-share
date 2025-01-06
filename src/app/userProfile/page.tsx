@@ -76,13 +76,15 @@ const UserProfile = () => {
               {isEditing[field] ? (
                 <button
                   className="edit-button"
-                  onClick={() => handleSaveClick(field)}>
+                  onClick={() => handleSaveClick(field)}
+                >
                   Save
                 </button>
               ) : (
                 <button
                   className="edit-button"
-                  onClick={() => handleEditClick(field)}>
+                  onClick={() => handleEditClick(field)}
+                >
                   Edit
                 </button>
               )}

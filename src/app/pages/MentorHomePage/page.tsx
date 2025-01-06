@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import CardComponent from "../components/CardComponent/page";
-import styles from "../components/styles/mentorHomePage.module.css";
-import { cardData } from "../types/constant";
-import Navbar from "../components/NavBar/page";
+import CardComponent from "../../components/MentorServicesCard/page";
+import styles from "../../components/styles/mentorHomePage.module.css";
+import { cardData } from "../../types/constant";
+import Navbar from "../../components/NavBar/page";
 import { useRouter } from "next/navigation";
 export default function MentorHomePage() {
   const router = useRouter();

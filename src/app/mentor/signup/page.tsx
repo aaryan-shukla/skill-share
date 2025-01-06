@@ -6,7 +6,6 @@ import FormCard from "@/app/components/SignUpFormCard/formCard";
 import { useUserStore } from "@/app/store/userdetailsStore";
 import axios from "axios";
 import { CircularProgress, Backdrop } from "@mui/material";
-import { mentorSignUpFields } from "@/app/types/constant";
 
 const MentorRegistration = () => {
   const selectedUser = useUserStore((state) => state.selectedUser);
@@ -28,7 +27,7 @@ const MentorRegistration = () => {
         address: selectedUser.address,
       });
 
-      router.replace("/components/MentoraTab/Home");
+      router.replace("/pages/MentorHomePage");
     } catch (error: unknown) {
       console.error("Sign up error:", error);
       let errorMessage = "An error occurred during registration";
@@ -57,18 +56,18 @@ const MentorRegistration = () => {
   return (
     <>
       <FormCard
-        fields={mentorSignUpFields}
         heading="Mentor Registration"
         imageSource="/skillShare.jpeg"
         onSubmit={handleSubmit}
-        // error={error}
+        error={error}
       />
       <Backdrop
         open={loading}
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}>
+        }}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
     </>

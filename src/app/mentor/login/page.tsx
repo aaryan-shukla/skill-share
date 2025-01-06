@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import FormCard from "@/app/components/LoginFormCard/formCard";
 import axios from "axios";
 import { Backdrop, CircularProgress } from "@mui/material";
-import { mentorLoginFields } from "@/app/types/constant";
 const LearnerLogin = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -21,7 +20,7 @@ const LearnerLogin = () => {
         password: password,
       });
 
-      router.replace("/components/MentoraTab/Home");
+      router.replace("/pages/MentorHomePage");
     } catch (error: unknown) {
       console.error("Sign in error:", error);
       let errorMessage = "An error occurred during login";
@@ -62,7 +61,6 @@ const LearnerLogin = () => {
   return (
     <>
       <FormCard
-        fields={mentorLoginFields}
         heading="Log In"
         imageSource="/skillShare.jpeg"
         onSubmit={handleSubmit}
@@ -73,7 +71,8 @@ const LearnerLogin = () => {
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}>
+        }}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
     </>
