@@ -28,8 +28,16 @@ export interface UserData {
   password: string;
   photoUrl: string;
   address: string;
+  gender?: string;
+  location?: string;
+  birthday?: string;
+  summary?: string;
+  website?: string;
+  github?: string;
+  linkedin?: string;
+  twitter?: string;
+  [key: string]: string | undefined;
 }
-
 
 export interface CardProps {
   title?: string;
@@ -37,16 +45,16 @@ export interface CardProps {
   bgImageSource?: string;
   tabUrl?: string;
 }
-type Field = {
-  name: string;
-  type: string;
-  placeholder: string;
-};
+// type Field = {
+//   name: string;
+//   type: string;
+//   placeholder: string;
+// };
 export interface FormCardProps {
-  fields: Field[];
   heading: string;
   imageSource: string;
   onSubmit: (formData: UserData) => void;
+  error: string;
 }
 export interface CourseCardProps {
   title: string;
