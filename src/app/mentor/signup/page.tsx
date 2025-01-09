@@ -18,16 +18,24 @@ const MentorRegistration = () => {
     setError("");
 
     try {
-      await axios.post("http://localhost:3001/api/register/mentor", {
-        email: selectedUser.email.trim(),
-        password: selectedUser.password,
-        name: selectedUser.name,
-        phoneNumber: selectedUser.phoneNumber,
-        photoUrl: selectedUser.photoUrl,
-        address: selectedUser.address,
-      });
+      await axios.post(
+        "http://localhost:3001/api/register/mentor",
+        {
+          email: selectedUser.email.trim(),
+          password: selectedUser.password,
+          name: selectedUser.name,
+          phoneNumber: selectedUser.phoneNumber,
+          photoUrl: selectedUser.photoUrl,
+          address: selectedUser.address,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      router.replace("/pages/MentorHomePage");
+      router.replace("/mentor/login");
     } catch (error: unknown) {
       console.error("Sign up error:", error);
       let errorMessage = "An error occurred during registration";
@@ -66,8 +74,7 @@ const MentorRegistration = () => {
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}
-      >
+        }}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </>

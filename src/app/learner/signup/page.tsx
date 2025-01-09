@@ -18,16 +18,24 @@ const LearnerRegistration = () => {
     setError("");
 
     try {
-      await axios.post("http://localhost:3001/api/register/learner", {
-        email: selectedUser.email.trim(),
-        password: selectedUser.password,
-        name: selectedUser.name,
-        phoneNumber: selectedUser.phoneNumber,
-        photoUrl: selectedUser.photoUrl,
-        address: selectedUser.address,
-      });
+      await axios.post(
+        "http://localhost:3001/api/register/learner",
+        {
+          email: selectedUser.email.trim(),
+          password: selectedUser.password,
+          name: selectedUser.name,
+          phoneNumber: selectedUser.phoneNumber,
+          photoUrl: selectedUser.photoUrl,
+          address: selectedUser.address,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      router.replace("/components/MentoraTab/Home");
+      router.replace("/learner/login");
     } catch (error: unknown) {
       console.error("Sign up error:", error);
       let errorMessage = "An error occurred during registration";
@@ -66,8 +74,7 @@ const LearnerRegistration = () => {
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}
-      >
+        }}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </>

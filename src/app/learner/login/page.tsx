@@ -15,12 +15,21 @@ const LearnerLogin = () => {
     setError("");
 
     try {
-      await axios.post("http://localhost:3001/api/login/learner", {
-        email: email.trim(),
-        password: password,
-      });
-
-      router.replace("/components/MentoraTab/Home");
+      const response = await axios.post(
+        "http://localhost:3001/api/login/learner",
+        {
+          email: email.trim(),
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const { user } = response.data;
+      localStorage.setItem("user", JSON.stringify(user));
+      router.replace("/pages/MentorHomePage");
     } catch (error: unknown) {
       console.error("Sign in error:", error);
       let errorMessage = "An error occurred during login";
@@ -71,8 +80,7 @@ const LearnerLogin = () => {
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}
-      >
+        }}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </>

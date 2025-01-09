@@ -15,10 +15,18 @@ const LearnerLogin = () => {
     setError("");
 
     try {
-      await axios.post("http://localhost:3001/api/login/mentor", {
-        email: email.trim(),
-        password: password,
-      });
+      await axios.post(
+        "http://localhost:3001/api/login/mentor",
+        {
+          email: email.trim(),
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       router.replace("/pages/MentorHomePage");
     } catch (error: unknown) {
@@ -71,8 +79,7 @@ const LearnerLogin = () => {
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}
-      >
+        }}>
         <CircularProgress color="inherit" />
       </Backdrop>
     </>
