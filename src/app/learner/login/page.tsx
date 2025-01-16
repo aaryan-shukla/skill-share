@@ -13,7 +13,8 @@ const LearnerLogin = () => {
   const handleSubmit = async (email: string, password: string) => {
     setLoading(true);
     setError("");
-
+    //abcd@abcd.com
+    //abcd1234
     try {
       const response = await axios.post(
         "http://localhost:3001/api/login/learner",
@@ -28,6 +29,7 @@ const LearnerLogin = () => {
         }
       );
       const { user } = response.data;
+      console.log(user);
       localStorage.setItem("user", JSON.stringify(user));
       router.replace("/pages/MentorHomePage");
     } catch (error: unknown) {
