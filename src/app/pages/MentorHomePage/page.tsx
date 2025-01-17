@@ -6,13 +6,15 @@ import styles from "../../components/styles/mentorHomePage.module.css";
 import { cardData } from "../../types/constant";
 import Navbar from "../../components/NavBar/page";
 import { useRouter } from "next/navigation";
+import { useUserStore } from "@/app/store/userdetailsStore";
 export default function MentorHomePage() {
   const router = useRouter();
   const [user, setUser] = useState<{
     displayName: string;
     email: string;
   } | null>(null);
-
+  const selectedUser = useUserStore((state) => state.selectedUser);
+  console.log(selectedUser);
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -27,10 +29,11 @@ export default function MentorHomePage() {
     <div>
       <Navbar />
       {/* Display user details */}
-      {/* {user && (
+
+      {/* {selectedUser && (
         <div>
-          <p>Welcome, {user.displayName || "Mentor"}!</p>
-          <p>Your email: {user.email}</p>
+          <p>Welcome, {selectedUser.name || "Mentor"}!</p>
+          <p>Your email: {selectedUser.email}</p>
         </div>
       )} */}
       <div className={styles.headerTextContainer}>
