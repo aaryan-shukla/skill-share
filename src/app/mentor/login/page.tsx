@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import FormCard from "@/app/components/LoginFormCard/formCard";
 import axios from "axios";
-import { Backdrop, CircularProgress } from "@mui/material";
+import { Backdrop, CircularProgress, Button } from "@mui/material";
+
 const LearnerLogin = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -74,6 +75,12 @@ const LearnerLogin = () => {
         onSubmit={handleSubmit}
         error={error}
       />
+      <div style={{ marginTop: "20px", textAlign: "center" }}>
+        <p>Don't have an account?</p>
+        <Button onClick={() => router.push("/mentor/signup")} variant="contained">
+          Sign Up
+        </Button>
+      </div>
       <Backdrop
         open={loading}
         sx={{
