@@ -33,7 +33,7 @@ body {
 }
 
 .mentorshipTable th {
-  background-color: #af4c4c;
+  background-color: #c93b3b;
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -126,4 +126,21 @@ body {
 .modalActions button:last-child {
   background-color: #f44336;
   color: white;
+}
+.dropdown {
+  margin-top: 10px;
+}
+
+.dropdownSelect {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.dropdownSelect:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
