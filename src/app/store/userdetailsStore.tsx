@@ -45,23 +45,38 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
       );
 
       const user = response.data.user;
-      console.log("user", user);
+      if (!user) {
+        throw new Error("Invalid server response. User data is missing.");
+      }
+
       set({
         selectedUser: {
-          id: user.id || "",
+          id: user.uid || "",
           name: user.displayName || "",
           email: user.email || "",
           phoneNumber: user.phoneNumber || "",
           photoUrl: user.photoUrl || "",
           address: user.address || "",
-          password: "", // Never store the password in plain text
+          password: "", // Never store passwords in plain text
         },
         error: null,
       });
-    } catch (error: any) {
+    } catch (err: unknown) {
+      let errorMessage = "An unexpected error occurred.";
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      } else if (
+        typeof err === "object" &&
+        (err as any)?.response?.data?.error
+      ) {
+        errorMessage = (err as any).response.data.error;
+      }
+
       set({
-        error: error.response?.data?.message || "Login failed.",
+        error: errorMessage,
       });
+
+      throw new Error(errorMessage); // Ensure the caller is notified of the failure
     } finally {
       set({ loading: false });
     }
