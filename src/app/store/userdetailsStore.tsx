@@ -20,13 +20,17 @@ const initialUser: UserData = {
   photoUrl: "",
   address: "",
 };
-
+const getStoredUser = (): UserData => {
+  const storedUser = localStorage.getItem("user");
+  return storedUser ? JSON.parse(storedUser) : initialUser;
+};
 export const useUserStore = create<UserDetailsStore>((set) => ({
-  selectedUser: initialUser,
+  selectedUser: getStoredUser(),
   error: null,
   loading: false,
 
   setUser: (details) => {
+    localStorage.setItem("user", JSON.stringify(details));
     set({ selectedUser: details });
   },
 
@@ -62,6 +66,7 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
         },
         error: null,
       });
+      localStorage.setItem("user", JSON.stringify(user));
     } catch (err: unknown) {
       let errorMessage = "An unexpected error occurred.";
       if (err instanceof Error) {
@@ -77,13 +82,14 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
         error: errorMessage,
       });
 
-      throw new Error(errorMessage); // Ensure the caller is notified of the failure
+      throw new Error(errorMessage);
     } finally {
       set({ loading: false });
     }
   },
 
   clearUser: () => {
+    localStorage.removeItem("user");
     set({ selectedUser: initialUser });
   },
 }));
