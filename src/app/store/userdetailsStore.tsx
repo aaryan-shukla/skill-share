@@ -45,6 +45,7 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
       );
 
       const user = response.data.user;
+      console.log("user", response);
       if (!user) {
         throw new Error("Invalid server response. User data is missing.");
       }
@@ -52,12 +53,12 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
       set({
         selectedUser: {
           id: user.uid || "",
-          name: user.displayName || "",
+          name: user.name || "",
           email: user.email || "",
           phoneNumber: user.phoneNumber || "",
           photoUrl: user.photoUrl || "",
           address: user.address || "",
-          password: "", // Never store passwords in plain text
+          password: "",
         },
         error: null,
       });
