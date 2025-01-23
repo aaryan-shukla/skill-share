@@ -53,6 +53,75 @@ body {
   font-weight: bold;
   font-size: 14px;
 }
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+.dropdown,
+.dialog {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 10;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdownSelect {
+  width: 100%;
+  padding: 5px;
+  font-size: 1em;
+}
+.dialog {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 10;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: none; /* Initially hidden */
+}
+
+.actions:hover .dialog {
+  display: block; /* Show on hover */
+}
+
+.dialog label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.dialog input,
+.dialog button {
+  font-size: 0.85em;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.dialog button {
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.dialog button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
 
 .actions button {
   margin: 0 4px;

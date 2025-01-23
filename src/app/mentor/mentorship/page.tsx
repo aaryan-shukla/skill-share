@@ -158,7 +158,15 @@ const MentorshipTable = () => {
               const [endHour] = row.timeSlot.end.split(":").map(Number);
 
               return (
-                <tr key={row.id}>
+                <tr
+                  key={row.id}
+                  style={{
+                    backgroundColor: row.canceled
+                      ? "indianred"
+                      : row.accepted
+                      ? "lightgreen"
+                      : "white",
+                  }}>
                   <td>{row.name}</td>
                   <td>{row.description}</td>
                   <td>{row.date || "Not Set"}</td>
@@ -168,7 +176,14 @@ const MentorshipTable = () => {
                       : "Not Set"}
                   </td>
                   <td className={styles.actions}>
-                    {row.accepted ? (
+                    {row.canceled ? (
+                      <>
+                        <span>Declined</span>
+                        <button onClick={() => handleRevert(row.id)}>
+                          Revert
+                        </button>
+                      </>
+                    ) : row.accepted ? (
                       <>
                         <span>
                           Accepted: {row.date}, {row.timeSlot.start} -{" "}
@@ -181,114 +196,124 @@ const MentorshipTable = () => {
                     ) : (
                       <>
                         <button
-                          onClick={() =>
+                          onClick={() => {
                             setDropdownRowId(
                               dropdownRowId === row.id ? null : row.id
-                            )
-                          }>
+                            );
+                            setCalendarRowId(null); // Close calendar when opening time selection
+                          }}>
                           ✅
                         </button>
+
+                        {/* Time Selection Dialog */}
+                        {dropdownRowId === row.id && (
+                          <div className={styles.dropdown}>
+                            <label>Select Time:</label>
+                            <select
+                              className={styles.dropdownSelect}
+                              onChange={(e) => {
+                                const selectedTime = e.target.value;
+                                if (
+                                  validateTimeSelection(
+                                    row.timeSlot,
+                                    selectedTime,
+                                    mentorshipDuration
+                                  )
+                                ) {
+                                  handleSaveTime(row.id, selectedTime);
+                                } else {
+                                  alert(
+                                    "Invalid time selection. Please select a valid time within the slot."
+                                  );
+                                }
+                              }}>
+                              {Array.from(
+                                { length: endHour - startHour + 1 },
+                                (_, i) => {
+                                  const hour = String(startHour + i).padStart(
+                                    2,
+                                    "0"
+                                  );
+                                  return [
+                                    `${hour}:00`,
+                                    `${hour}:15`,
+                                    `${hour}:30`,
+                                    `${hour}:45`,
+                                  ];
+                                }
+                              )
+                                .flat()
+                                .filter((time) => {
+                                  const [hour] = time.split(":");
+                                  return (
+                                    Number(hour) + mentorshipDuration <= endHour
+                                  );
+                                })
+                                .map((time) => (
+                                  <option key={time} value={time}>
+                                    {time}
+                                  </option>
+                                ))}
+                            </select>
+                          </div>
+                        )}
+
+                        {/* Date Selection Dialog */}
                         <button
-                          onClick={() =>
+                          onClick={() => {
                             setCalendarRowId(
                               calendarRowId === row.id ? null : row.id
-                            )
-                          }>
+                            );
+                            setDropdownRowId(null); // Close time selection when opening calendar
+                          }}>
                           ⏲️
                         </button>
+                        {calendarRowId === row.id && (
+                          <div className={styles.dialog}>
+                            <label>Select Date:</label>
+                            <input
+                              type="date"
+                              min={todayDate}
+                              value={proposedDate}
+                              onChange={(e) => setProposedDate(e.target.value)}
+                            />
+                            <label>Select Start Time:</label>
+                            <input
+                              type="time"
+                              value={proposedStartTime}
+                              onChange={(e) =>
+                                setProposedStartTime(e.target.value)
+                              }
+                            />
+                            <button
+                              onClick={() =>
+                                handleSaveProposedTime(
+                                  row.id,
+                                  proposedDate,
+                                  proposedStartTime
+                                )
+                              }
+                              disabled={!proposedDate || !proposedStartTime}>
+                              Save
+                            </button>
+                          </div>
+                        )}
+
                         <button
-                          onClick={() =>
+                          onClick={() => {
                             setData(
                               data.map((item) =>
                                 item.id === row.id
                                   ? { ...item, canceled: true }
                                   : item
                               )
-                            )
-                          }
-                          disabled={row.canceled}>
-                          {row.canceled ? "Declined" : "❌"}
+                            );
+                            setDropdownRowId(null); // Close any open dropdown
+                            setCalendarRowId(null); // Close calendar
+                          }}>
+                          ❌
                         </button>
                       </>
-                    )}
-                    {dropdownRowId === row.id && (
-                      <div className={styles.dropdown}>
-                        <label>Select Time: </label>
-                        <select
-                          className={styles.dropdownSelect}
-                          onChange={(e) => {
-                            const selectedTime = e.target.value;
-                            if (
-                              validateTimeSelection(
-                                row.timeSlot,
-                                selectedTime,
-                                mentorshipDuration
-                              )
-                            ) {
-                              handleSaveTime(row.id, selectedTime);
-                            } else {
-                              alert(
-                                "Invalid time selection. Please select a valid time within the slot."
-                              );
-                            }
-                          }}>
-                          {Array.from(
-                            { length: endHour - startHour + 1 },
-                            (_, i) => {
-                              const hour = String(startHour + i).padStart(
-                                2,
-                                "0"
-                              );
-                              return [
-                                `${hour}:00`,
-                                `${hour}:15`,
-                                `${hour}:30`,
-                                `${hour}:45`,
-                              ];
-                            }
-                          )
-                            .flat()
-                            .filter((time) => {
-                              const [hour] = time.split(":");
-                              return (
-                                Number(hour) + mentorshipDuration <= endHour
-                              );
-                            })
-                            .map((time) => (
-                              <option key={time} value={time}>
-                                {time}
-                              </option>
-                            ))}
-                        </select>
-                      </div>
-                    )}
-                    {calendarRowId === row.id && (
-                      <div className={styles.calendar}>
-                        <label>Select Date: </label>
-                        <input
-                          type="date"
-                          min={todayDate}
-                          value={proposedDate}
-                          onChange={(e) => setProposedDate(e.target.value)}
-                        />
-                        <label>Select Start Time: </label>
-                        <input
-                          type="time"
-                          value={proposedStartTime}
-                          onChange={(e) => setProposedStartTime(e.target.value)}
-                        />
-                        <button
-                          onClick={() =>
-                            handleSaveProposedTime(
-                              row.id,
-                              proposedDate,
-                              proposedStartTime
-                            )
-                          }
-                          disabled={!proposedDate || !proposedStartTime}>
-                          Save
-                        </button>
-                      </div>
                     )}
                   </td>
                 </tr>
