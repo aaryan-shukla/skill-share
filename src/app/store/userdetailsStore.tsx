@@ -21,16 +21,22 @@ const initialUser: UserData = {
   address: "",
 };
 const getStoredUser = (): UserData => {
-  const storedUser = localStorage.getItem("user");
-  return storedUser ? JSON.parse(storedUser) : initialUser;
+  if (typeof window !== "undefined") {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : initialUser;
+  }
+  return initialUser;
 };
+
 export const useUserStore = create<UserDetailsStore>((set) => ({
-  selectedUser: getStoredUser(),
+  selectedUser: typeof window === "undefined" ? initialUser : getStoredUser(),
   error: null,
   loading: false,
 
   setUser: (details) => {
-    localStorage.setItem("user", JSON.stringify(details));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user", JSON.stringify(details));
+    }
     set({ selectedUser: details });
   },
 
@@ -68,20 +74,15 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
       });
       localStorage.setItem("user", JSON.stringify(user));
     } catch (err: unknown) {
-      let errorMessage = "An unexpected error occurred.";
-      if (err instanceof Error) {
-        errorMessage = err.message;
-      } else if (
-        typeof err === "object" &&
-        (err as any)?.response?.data?.error
-      ) {
-        errorMessage = (err as any).response.data.error;
-      }
+      const errorMessage =
+        axios.isAxiosError(err) && err.response?.data?.error
+          ? err.response.data.error
+          : err instanceof Error
+          ? err.message
+          : "An unexpected error occurred.";
+      console.error("Login error:", err);
 
-      set({
-        error: errorMessage,
-      });
-
+      set({ error: errorMessage });
       throw new Error(errorMessage);
     } finally {
       set({ loading: false });
@@ -89,7 +90,9 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
   },
 
   clearUser: () => {
-    localStorage.removeItem("user");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("user");
+    }
     set({ selectedUser: initialUser });
   },
 }));

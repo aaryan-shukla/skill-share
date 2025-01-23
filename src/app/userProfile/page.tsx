@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/userProfile.css";
 import Navbar from "../components/NavBar/page";
 import { useUserStore } from "../store/userdetailsStore";
@@ -8,6 +8,7 @@ import axios from "axios";
 
 const UserProfile = () => {
   const { selectedUser, setUser } = useUserStore();
+  const [clientUser, setClientUser] = useState(selectedUser);
   const [isEditing, setIsEditing] = useState<Record<string, boolean>>({});
 
   const [editedInfo, setEditedInfo] = React.useState(selectedUser);
@@ -89,7 +90,10 @@ const UserProfile = () => {
       }
     }
   };
-
+  useEffect(() => {
+    setClientUser(selectedUser); // Ensures client-side rendering
+  }, [selectedUser]);
+  console.log(selectedUser.photoUrl);
   return (
     <>
       <Navbar />
