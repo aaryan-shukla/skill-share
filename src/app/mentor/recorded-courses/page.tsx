@@ -5,10 +5,13 @@ import React, { useState } from "react";
 import styles from "../recorded-courses/recordedCourses.module.css";
 import CourseCardComponent from "@/app/components/MentoraTab/CoursesCards/page";
 import Modal from "@/app/components/Modal";
+import { useRouter } from "next/navigation";
 
 export default function RecordedLecture() {
+  const router = useRouter();
   const courses = [
     {
+      id: 1,
       title: "How to Budget and Forecast for Your Business",
       author: "Bplans School of Business, Tim Berry",
       price: 549,
@@ -17,6 +20,7 @@ export default function RecordedLecture() {
       imageUrl: "/skillshare.jpeg",
     },
     {
+      id: 2,
       title: "Mastering React for Beginners",
       author: "React Academy, John Doe",
       price: 799,
@@ -25,6 +29,7 @@ export default function RecordedLecture() {
       imageUrl: "/skillshare1.jpeg",
     },
     {
+      id: 55,
       title: "Python for Data Science",
       author: "DataCamp, Jane Smith",
       price: 999,
@@ -33,6 +38,7 @@ export default function RecordedLecture() {
       imageUrl: "/skillshare.jpeg",
     },
     {
+      id: 223,
       title: "Python for Data Science",
       author: "DataCamp, Jane Smith",
       price: 999,
@@ -41,6 +47,7 @@ export default function RecordedLecture() {
       imageUrl: "/skillShareFormLearnerImage.jpeg",
     },
     {
+      id: 26,
       title: "Python for Data Science",
       author: "DataCamp, Jane Smith",
       price: 999,
@@ -49,6 +56,7 @@ export default function RecordedLecture() {
       imageUrl: "/skillshare.jpeg",
     },
     {
+      id: 25,
       title: "Python for Data Science",
       author: "DataCamp, Jane Smith",
       price: 999,
@@ -57,6 +65,7 @@ export default function RecordedLecture() {
       imageUrl: "/skillshare1.jpeg",
     },
     {
+      id: 24,
       title: "Python for Data Science",
       author: "DataCamp, Jane Smith",
       price: 999,
@@ -65,6 +74,7 @@ export default function RecordedLecture() {
       imageUrl: "/skillShareFormLearnerImage.jpeg",
     },
     {
+      id: 23,
       title: "Python for Data Science",
       author: "DataCamp, Jane Smith",
       price: 999,
@@ -91,7 +101,13 @@ export default function RecordedLecture() {
   };
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+  const handleEdit = (courseId: number) => {
+    router.push(`/mentor/recorded-courses/${courseId}/edit`);
+  };
 
+  const handleView = (courseId: number) => {
+    router.push(`/mentor/recorded-courses/${courseId}/view`);
+  };
   return (
     <>
       <div>
@@ -127,6 +143,8 @@ export default function RecordedLecture() {
               originalPrice={course.originalPrice}
               rating={course.rating}
               imageUrl={course.imageUrl}
+              onEdit={() => handleEdit(course.id)}
+              onView={() => handleView(course.id)}
             />
           ))}
         </div>

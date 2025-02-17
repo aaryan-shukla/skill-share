@@ -20,13 +20,23 @@ const initialUser: UserData = {
   photoUrl: "",
   address: "",
 };
+const getStoredUser = (): UserData => {
+  if (typeof window !== "undefined") {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : initialUser;
+  }
+  return initialUser;
+};
 
 export const useUserStore = create<UserDetailsStore>((set) => ({
-  selectedUser: initialUser,
+  selectedUser: typeof window === "undefined" ? initialUser : getStoredUser(),
   error: null,
   loading: false,
 
   setUser: (details) => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user", JSON.stringify(details));
+    }
     set({ selectedUser: details });
   },
 
@@ -45,29 +55,44 @@ export const useUserStore = create<UserDetailsStore>((set) => ({
       );
 
       const user = response.data.user;
-      console.log("user", user);
+      console.log("user", response);
+      if (!user) {
+        throw new Error("Invalid server response. User data is missing.");
+      }
+
       set({
         selectedUser: {
-          id: user.id || "",
-          name: user.displayName || "",
+          id: user.uid || "",
+          name: user.name || "",
           email: user.email || "",
           phoneNumber: user.phoneNumber || "",
           photoUrl: user.photoUrl || "",
           address: user.address || "",
-          password: "", // Never store the password in plain text
+          password: "",
         },
         error: null,
       });
-    } catch (error: any) {
-      set({
-        error: error.response?.data?.message || "Login failed.",
-      });
+      localStorage.setItem("user", JSON.stringify(user));
+    } catch (err: unknown) {
+      const errorMessage =
+        axios.isAxiosError(err) && err.response?.data?.error
+          ? err.response.data.error
+          : err instanceof Error
+          ? err.message
+          : "An unexpected error occurred.";
+      console.error("Login error:", err);
+
+      set({ error: errorMessage });
+      throw new Error(errorMessage);
     } finally {
       set({ loading: false });
     }
   },
 
   clearUser: () => {
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("user");
+    }
     set({ selectedUser: initialUser });
   },
 }));
