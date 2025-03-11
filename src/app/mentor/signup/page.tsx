@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import FormCard from "@/app/components/SignUpFormCard/formCard";
 import { useUserStore } from "@/app/store/userdetailsStore";
 import axios from "axios";
-import { CircularProgress, Backdrop, Button } from "@mui/material";
+import { CircularProgress, Backdrop } from "@mui/material";
 
 const MentorRegistration = () => {
   const selectedUser = useUserStore((state) => state.selectedUser);
@@ -35,7 +35,7 @@ const MentorRegistration = () => {
         }
       );
 
-      router.replace("/mentor/login");
+      router.replace("/pages/MentorHomePage");
     } catch (error: unknown) {
       console.error("Sign up error:", error);
       let errorMessage = "An error occurred during registration";
@@ -69,18 +69,13 @@ const MentorRegistration = () => {
         onSubmit={handleSubmit}
         error={error}
       />
-      <div style={{ marginTop: "20px", textAlign: "center" }}>
-        <p>Already a user?</p>
-        <Button onClick={() => router.push("/mentor/login")} variant="contained">
-          Login
-        </Button>
-      </div>
       <Backdrop
         open={loading}
         sx={{
           color: "#fff",
           zIndex: 1301,
-        }}>
+        }}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
     </>

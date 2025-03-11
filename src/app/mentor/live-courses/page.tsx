@@ -2,7 +2,7 @@
 
 import Navbar from "@/app/components/NavBar/page";
 import React, { useState } from "react";
-import styles from "../live-courses/liveCourses.module.css";
+import styles from "./livecourses.module.css";
 import { useRouter } from "next/navigation";
 export default function LiveCourses() {
   const router = useRouter();
@@ -61,7 +61,8 @@ export default function LiveCourses() {
           />
           <button
             className={styles.searchButton}
-            onClick={handleSearch}></button>
+            onClick={handleSearch}
+          ></button>
         </div>
       </div>
     </>
